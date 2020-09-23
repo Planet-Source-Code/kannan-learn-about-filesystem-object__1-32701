@@ -1,0 +1,230 @@
+
+When I want to upload a demo with file system object, I decided
+to use the same file system object to make the demo. This demo
+uses the file system object to read and segregate the file contents.
+
+You may get some good piece of code / routine from this demo. 
+Whether you like this code or not, please leave some comments. So that I can 
+come out with some good / better code.
+
+The file format syntax is something like this...
+
+Description or comment. ie what you are reading now.
+File content begins from #Start.
+Next line is number of topics
+
+For each topic 
+Topic info starts with #Topic + Index
+
+Topic Title  + "|" + True / False to say whether this topic has any sample code or not.
+Topic Description
+
+The file ends with #End
+
+#SkipLine means skip this line. may be a comment
+
+#Start
+13
+#Topic1
+FileSystem Object|False
+File system object gives you access to the 
+computer's file system. This is a flexible 
+object wich gives you access to every folder 
+and file in the computer. 
+
+Actually a part of vbScript, available for vb 
+also. To gain access to your computer's file 
+system create the FileSystem Object variable 
+with CreateObject() fn.
+
+Set objFileSystem = CreateObject("Scripting.FileSystemObject")
+
+or add the Microsoft Scripting runtime dll 
+(..\systemfolder\scrrun.dll) to your project 
+reference and refer as 
+
+Set objFileSystem = new Scripting.FileSystemObject
+
+#SkipLine : Topic 1 ends and Topic 2 begins
+#Topic2
+CreateFile Method|True
+
+This method creates a new text file and 
+returns a TextStream object that can be used 
+to read from or write to the file. The syntax 
+of the CreateTextFile method is:
+
+Set TStream = objFileSystem.CreateTextFile(Filename,overwrite,Unicode)
+
+FileName argument specifies the name of the 
+file to be created and is the only required 
+argument. OverWrite true will overwrite the 
+existing file, The last argument, Unicode 
+indicates whether the file is created as a  
+Unicode or an Ascii file. if omitted Ascii 
+is assumed.
+
+#SkipLine : Topic 2 ends and Topic 3 begins
+#Topic3
+OpenTextFile Method|False
+In addition to creating new text files, you
+can open existing files with the 
+OpenTextFile method, whose syntax is
+
+objFileSystem.OpenTextFile(filename, ioMode, Create, format)
+
+The OpenTextFile method opens the specified 
+file and returns a TextStreamObject that can
+be used to read from or Write to the file.
+
+---------------------------------------------------------------
+Constant     Value      Description
+---------------------------------------------------------------
+ForReading      1         file opened for reading existing data
+ForAppending  2         file opened for appending new data  
+---------------------------------------------------------------
+
+#SkipLine : Topic 3 ends and Topic 4 begins
+#Topic4
+Read|True
+This method reads a specified number of
+characters from a TextStream Object. Its
+syntax is:
+
+TStream.Read(Characters)
+
+in which 'chatacters' is the number of 
+characters to be read from and TStream
+is a TextStream variable.
+
+#SkipLine : Topic 4 ends and Topic 5 begins
+#Topic5
+ReadAll|True
+
+This method reads the entire TextStream 
+(Text File) and returns the text as a string
+variable. Its syntax is 
+
+fileText = TStream.ReadAll
+
+#SkipLine : Topic 1 ends and Topic 2 begins
+#Topic6
+ReadLine|True
+
+This method reads one line of the text as a 
+time (up to, but not including, the newline
+character) from a text file and returns the
+resulting string. Its syntax is 
+
+fileText = TStream.ReadLine
+
+#Topic7
+Skip|True
+
+This method skips a specified number of 
+characters when reading a text file.
+Its syntax is:
+
+TStream.Skip(Characters)
+
+in which 'Characters' is the number of 
+characters to be skipped.
+
+#Topic8
+SkipLine|True
+This method skips the next line of the text
+file, and its syntax is:
+
+TStream.SkipLine
+
+The characters ofthe skipped line are discarded, 
+up to and including the next newline character.
+
+The best example for this topic is this program 
+itself. It uses skip line to skip the comments.
+
+#Topic9
+Write
+This method writes the specified string to a
+TextStream file. Its syntax is 
+
+TStream.Write(String)
+
+in which 'String' is the string (literal or 
+variable) to be written to the file. Strings
+are written to the file with no intervening
+spaces or characters between each string. Use
+the WriteLine method to write a new line 
+character or a string that end with a new line
+character.
+
+
+#Topic10
+WriteLine|True
+This method writes teh specified string followed
+by  anew line character to the file. Its
+syntax is 
+
+TStream.WriteLine(String)
+
+in which 'string' is the text you want to write to the 
+file. If you call the WriteLine method without an
+argument a newline character is written to the file.
+
+#SkipLine In the next topic's title line if "|True" is not mentioned it will be considered as false.
+#Topic11
+WriteBlankLines
+This method writes a specified number of blank lines
+(new line chars) to the file. Its syntax is:
+
+TStream.WriteBlankLines(lines)
+
+in which 'lines' is the number of blank lines to be
+inserted in the file.
+
+#Topic12
+StreamObject Properties|False
+Stream object provides a number of properties, which
+allow your code to know where the pointer is in the 
+current text stream.
+
+AtEndOfLine : 
+
+This is a read-only property that
+returns True if the file pointer is at the end
+of a line in the TextStream Obect, else returns
+false.
+
+You can use this property to read a line of chars
+one at a time, with a loop similar to the following:
+
+Do While TStream.AtEndOfLine = False
+      newChar = TStream.Read(1)
+      ' Do your code here	
+
+Loop
+
+ATEndOfStream: 
+
+This is another read-only property that
+returns True if the file pointer is at the end of the
+TextStream Object. This property applies only to
+TextStream files that are open for reading. You can
+use this property to read the entire file (This program
+used this method to get the data from the demo file)
+one line at a time, with a loop such as the following:
+
+Do While TStream.AtEndOfStream = False
+    newLine = TStream.ReadLine
+    ' Do your code here
+Loop
+
+#Topic13
+Accessing Folders and Files|False
+Soon I will make this demo and upload.
+
+
+#End
+
+
+
